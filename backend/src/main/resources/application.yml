@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: fintrack
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fintrack
+    username: ${DB_USERNAME:fintrack_user}
+    password: ${DB_PASSWORD:secure_password}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    enabled: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    com.fintrack: DEBUG
+    org.springframework.security: TRACE
+    org.springframework.web: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: when-authorized
+
+app:
+  jwt:
+    secretKey: ${JWT_SECRET:yourSuperSecretKeyForJWTGenerationChangeThisInProduction1234567890}
+    expirationMs: 86400000    # 24 hours
+    refreshExpirationMs: 604800000  # 7 days
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
