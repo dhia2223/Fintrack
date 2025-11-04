@@ -53,7 +53,7 @@ FinTrack is a modern, full-stack personal finance platform designed to help user
 | Spring Security + JWT | Authentication & Authorization            |
 | Spring Data JPA       | Database persistence                      |
 | PostgreSQL            | Main database                             |
-| Swagger/OpenAPI       | API documentation (if enabled in project) |
+| Swagger/OpenAPI       | API documentation                         |
 
 ### **Infrastructure**
 
