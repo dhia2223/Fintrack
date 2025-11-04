@@ -29,12 +29,11 @@ public class BudgetController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate month) {
 
         if (month == null) {
-            month = LocalDate.now().withDayOfMonth(1); // Current month
+            month = LocalDate.now().withDayOfMonth(1); 
         }
 
         List<Budget> budgets = budgetService.getUserBudgetsForMonth(month);
 
-        // Convert to response DTOs
         List<BudgetResponse> responses = budgets.stream()
                 .map(budget -> new BudgetResponse(
                         budget.getId(),
@@ -43,7 +42,7 @@ public class BudgetController {
                         budget.getCategory().getColor(),
                         budget.getAmount(),
                         budget.getMonth(),
-                        BigDecimal.ZERO, // Placeholder - would calculate from transactions
+                        BigDecimal.ZERO, 
                         budget.getCreatedAt(),
                         budget.getUpdatedAt()
                 ))
@@ -63,7 +62,7 @@ public class BudgetController {
                 budget.getCategory().getColor(),
                 budget.getAmount(),
                 budget.getMonth(),
-                BigDecimal.ZERO, // Placeholder
+                BigDecimal.ZERO, 
                 budget.getCreatedAt(),
                 budget.getUpdatedAt()
         );
@@ -82,7 +81,7 @@ public class BudgetController {
                 budget.getCategory().getColor(),
                 budget.getAmount(),
                 budget.getMonth(),
-                BigDecimal.ZERO, // Placeholder
+                BigDecimal.ZERO, 
                 budget.getCreatedAt(),
                 budget.getUpdatedAt()
         );
@@ -104,7 +103,7 @@ public class BudgetController {
                 budget.getCategory().getColor(),
                 budget.getAmount(),
                 budget.getMonth(),
-                BigDecimal.ZERO, // Placeholder
+                BigDecimal.ZERO, 
                 budget.getCreatedAt(),
                 budget.getUpdatedAt()
         );

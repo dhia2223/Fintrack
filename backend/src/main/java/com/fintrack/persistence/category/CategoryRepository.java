@@ -23,10 +23,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query("SELECT c FROM Category c WHERE c.user.id = :userId OR c.system = true ORDER BY c.name")
     List<Category> findByUserIdIncludingSystem(@Param("userId") Long userId);
 
-    // Find system categories
     List<Category> findBySystemTrueOrderByName();
 
-    // Find categories by user ID (including system categories)
     @Query("SELECT c FROM Category c WHERE c.user.id = :userId OR c.user IS NULL ORDER BY c.name")
     List<Category> findAvailableCategoriesForUser(@Param("userId") Long userId);
 }

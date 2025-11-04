@@ -65,7 +65,6 @@ public class Transaction {
         INCOME, EXPENSE
     }
 
-    // Constructors
     public Transaction() {}
 
     public Transaction(User user, com.fintrack.domain.account.Account account,
@@ -80,7 +79,6 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

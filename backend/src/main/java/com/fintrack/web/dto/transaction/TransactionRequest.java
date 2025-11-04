@@ -28,10 +28,8 @@ public class TransactionRequest {
     @NotNull
     private LocalDate transactionDate;
 
-    // Default constructor
     public TransactionRequest() {}
 
-    // Getters and setters
     public Long getAccountId() { return accountId; }
     public void setAccountId(Long accountId) { this.accountId = accountId; }
 

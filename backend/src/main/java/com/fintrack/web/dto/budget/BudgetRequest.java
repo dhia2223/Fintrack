@@ -18,10 +18,8 @@ public class BudgetRequest {
     @NotNull
     private LocalDate month;
 
-    // Default constructor
     public BudgetRequest() {}
 
-    // Getters and setters
     public Long getCategoryId() { return categoryId; }
     public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
 

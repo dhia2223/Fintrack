@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth") // Remove /api prefix - it's handled by context path
+@RequestMapping("/auth") 
 public class AuthController {
 
     private final AuthService authService;
@@ -44,7 +44,7 @@ public class AuthController {
             User user = authService.getCurrentUser();
 
             return ResponseEntity.ok(new JwtResponse(jwt,
-                    user.getId(),  // Add user ID
+                    user.getId(),  
                     user.getEmail(),
                     user.getFirstName(),
                     user.getLastName()));

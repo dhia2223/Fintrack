@@ -48,7 +48,6 @@ public class AuthService {
             throw new RuntimeException("Error: Email is already taken!");
         }
 
-        // Create new user's account
         User user = new User(
                 registerRequest.getEmail(),
                 passwordEncoder.encode(registerRequest.getPassword()),
@@ -57,10 +56,8 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        // Create default accounts for the user
         createDefaultAccounts(savedUser);
 
-        // Create user-specific categories
         createUserCategories(savedUser);
     }
 
@@ -96,7 +93,6 @@ public class AuthService {
     }
 
     private void createUserCategories(User user) {
-        // Create some user-specific categories
         List<Category> userCategories = Arrays.asList(
                 new Category(user, "Salary", "Monthly salary income", "#10B981", false),
                 new Category(user, "Freelance", "Freelance income", "#10B981", false),

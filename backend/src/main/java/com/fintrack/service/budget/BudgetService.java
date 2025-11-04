@@ -49,12 +49,10 @@ public class BudgetService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        // Verify category belongs to user or is system category
         if (!category.isSystem() && category.getUser() != null && !category.getUser().getId().equals(currentUser.getId())) {
             throw new RuntimeException("Category not found");
         }
 
-        // Check if budget already exists for this category and month
         if (budgetRepository.existsByUserIdAndCategoryIdAndMonth(currentUser.getId(), categoryId, month)) {
             throw new RuntimeException("Budget already exists for this category and month");
         }

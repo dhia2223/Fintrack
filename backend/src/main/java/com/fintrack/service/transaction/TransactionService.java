@@ -47,13 +47,11 @@ public class TransactionService {
         if (request.getCategoryId() != null) {
             category = categoryRepository.findById(request.getCategoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
-            // Verify category belongs to user or is system category
             if (!category.isSystem() && category.getUser() != null && !category.getUser().getId().equals(currentUser.getId())) {
                 throw new RuntimeException("Category not found");
             }
         }
 
-        // Validate that expense transactions don't make balance negative
         if (request.getType() == Transaction.TransactionType.EXPENSE) {
             BigDecimal newBalance = account.getBalance().subtract(request.getAmount());
             if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
@@ -72,7 +70,6 @@ public class TransactionService {
         transaction.setType(request.getType());
         transaction.setTransactionDate(request.getTransactionDate());
 
-        // Update account balance
         updateAccountBalance(account, request.getAmount(), request.getType());
 
         Transaction savedTransaction = transactionRepository.save(transaction);
@@ -130,11 +127,9 @@ public class TransactionService {
             throw new RuntimeException("Transaction not found");
         }
 
-        // Revert old transaction amount from account
         updateAccountBalance(transaction.getAccount(), transaction.getAmount(),
                 reverseTransactionType(transaction.getType()));
 
-        // Update transaction details
         Account account = accountRepository.findByIdAndUserId(request.getAccountId(), currentUser.getId())
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
@@ -142,13 +137,11 @@ public class TransactionService {
         if (request.getCategoryId() != null) {
             category = categoryRepository.findById(request.getCategoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
-            // Verify category belongs to user or is system category
             if (!category.isSystem() && category.getUser() != null && !category.getUser().getId().equals(currentUser.getId())) {
                 throw new RuntimeException("Category not found");
             }
         }
 
-        // Validate that expense transactions don't make balance negative
         if (request.getType() == Transaction.TransactionType.EXPENSE) {
             BigDecimal newBalance = account.getBalance().subtract(request.getAmount());
             if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
@@ -165,7 +158,6 @@ public class TransactionService {
         transaction.setType(request.getType());
         transaction.setTransactionDate(request.getTransactionDate());
 
-        // Apply new transaction amount to account
         updateAccountBalance(account, request.getAmount(), request.getType());
 
         Transaction updatedTransaction = transactionRepository.save(transaction);
@@ -182,7 +174,6 @@ public class TransactionService {
             throw new RuntimeException("Transaction not found");
         }
 
-        // Revert transaction amount from account
         updateAccountBalance(transaction.getAccount(), transaction.getAmount(),
                 reverseTransactionType(transaction.getType()));
 
@@ -208,7 +199,6 @@ public class TransactionService {
         } else {
             newBalance = account.getBalance().subtract(amount);
 
-            // Additional safety check - should never be negative due to validation above
             if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
                 throw new RuntimeException("Insufficient funds. This should not happen due to prior validation.");
             }

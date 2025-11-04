@@ -18,7 +18,6 @@ public class BudgetResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Constructors
     public BudgetResponse() {}
 
     public BudgetResponse(Long id, Long categoryId, String categoryName, String categoryColor,
@@ -38,7 +37,6 @@ public class BudgetResponse {
         this.updatedAt = updatedAt;
     }
 
-    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

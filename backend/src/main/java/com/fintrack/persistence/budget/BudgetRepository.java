@@ -18,7 +18,6 @@ public interface BudgetRepository extends JpaRepository<Budget, Long> {
 
     Optional<Budget> findByUserIdAndCategoryIdAndMonth(Long userId, Long categoryId, LocalDate month);
 
-    // Fixed query - removed the incorrect method
     List<Budget> findByUserIdAndMonth(Long userId, LocalDate month);
 
     boolean existsByUserIdAndCategoryIdAndMonth(Long userId, Long categoryId, LocalDate month);

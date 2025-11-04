@@ -49,7 +49,6 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // Constructors
     public User() {}
 
     public User(String email, String passwordHash, String firstName, String lastName) {
@@ -59,7 +58,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

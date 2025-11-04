@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/health") // Remove /api prefix
+@RequestMapping("/health") 
 public class HealthController {
 
     @GetMapping

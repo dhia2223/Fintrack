@@ -3,7 +3,7 @@ package com.fintrack.web.dto.auth;
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
-    private Long userId;  // Add this field
+    private Long userId;  
     private String email;
     private String firstName;
     private String lastName;
@@ -16,7 +16,6 @@ public class JwtResponse {
         this.lastName = lastName;
     }
 
-    // Getters and setters
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
 

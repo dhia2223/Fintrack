@@ -20,7 +20,7 @@ public class Category {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")  // Removed nullable = false
+    @JoinColumn(name = "user_id")  
     private User user;
 
     @NotBlank
@@ -44,10 +44,8 @@ public class Category {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // Constructors
     public Category() {}
 
-    // For system categories (user is null)
     public Category(String name, String description, String color, boolean system) {
         this.name = name;
         this.description = description;
@@ -55,7 +53,6 @@ public class Category {
         this.system = system;
     }
 
-    // For user categories
     public Category(User user, String name, String description, String color, boolean system) {
         this.user = user;
         this.name = name;
@@ -64,7 +61,6 @@ public class Category {
         this.system = system;
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
